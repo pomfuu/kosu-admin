@@ -36,3 +36,9 @@
     transform: rotate(360deg);
   }
 }
+
+.content {
+  background-color: #f8f9fa; /* Light background color */
+  padding: 20px;
+  flex-grow: 1; /* Ensures the content area expands to fill available space */
+}
