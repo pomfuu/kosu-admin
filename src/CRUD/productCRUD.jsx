@@ -1,6 +1,6 @@
-import { collection, addDoc, getDocs, doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { db, storage } from "../firebaseConfig";
+import { doc, getDoc, query, getDocs, setDoc, collection, addDoc, where, deleteDoc, updateDoc } from 'firebase/firestore';
 
 export const createProduct = async (product, imageURL) => {
     try {
@@ -25,7 +25,7 @@ export const createProduct = async (product, imageURL) => {
             formData.append('imageURL', imageURL);
         }
 
-        const response = await fetch('/api/products', {
+        const response = await fetch('/api/Products', {
             method: 'POST',
             body: formData,
         });
@@ -45,7 +45,7 @@ export const createProduct = async (product, imageURL) => {
 
 export const getProducts = async () => {
     try {
-        const querySnapshot = await getDocs(collection(db, "products"));
+        const querySnapshot = await getDocs(collection(db, "Products"));
         return querySnapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
@@ -57,7 +57,7 @@ export const getProducts = async () => {
 
 export const updateProduct = async (id, updatedFields) => {
     try {
-        const productRef = doc(db, "products", id);
+        const productRef = doc(db, "Products", id);
         await updateDoc(productRef, updatedFields);
         console.log("Product updated successfully!");
     } catch (error) {
@@ -67,7 +67,7 @@ export const updateProduct = async (id, updatedFields) => {
 
 export const deleteProduct = async (id) => {
     try {
-        const productRef = doc(db, "products", id);
+        const productRef = doc(db, "Products", id);
         await deleteDoc(productRef);
         console.log("Product deleted successfully!");
     } catch (error) {

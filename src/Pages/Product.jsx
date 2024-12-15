@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button, Dropdown, DropdownButton, Modal } from "react-bootstrap";
 import { createProduct } from "../CRUD/productCRUD";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage"; // Added imports
+import ProductList from "./ProductList";
 
 const uploadImage = async (file) => {
     const storage = getStorage();
@@ -91,7 +92,7 @@ const Product = () => {
     };
 
     return (
-        <div style={{ paddingLeft: 400 }}>
+        <div style={{ paddingLeft:400 }}>
             <button className="btn btn-primary" onClick={openModal}>Add Product</button>
             <Modal show={isOpen} onHide={closeModal}>
                 <Modal.Header closeButton>
@@ -280,6 +281,7 @@ const Product = () => {
                     <Button variant="primary" onClick={handleSaveChanges}>Save Changes</Button>
                 </Modal.Footer>
             </Modal>
+            <ProductList />
         </div>
     );
 };
